@@ -4,10 +4,10 @@ import AsyncHTTPClient
 import MultipartKit
 
 public struct LiveMailgunClient: MailgunClient {
-    private let eventLoop: EventLoop
-    private let config: Mailgun.Configuration
-    private let httpClient: HTTPClient
-    private let domain: Mailgun.Domain
+    public let eventLoop: EventLoop
+    public let config: Mailgun.Configuration
+    public let httpClient: HTTPClient
+    public let domain: Mailgun.Domain
     
     /// Initialize with default domain
     public init(
@@ -34,7 +34,7 @@ public struct LiveMailgunClient: MailgunClient {
         self.domain = domain
     }
     
-    public func send(_ endpoint: Mailgun.Endpoint) -> EventLoopFuture<HTTPClient.Response> {
+    public func sendRequest(_ endpoint: Mailgun.Endpoint) -> EventLoopFuture<HTTPClient.Response> {
         do {
             guard let authData = "api:\(config.apiKey)".data(using: .utf8)?.base64EncodedString() else {
                 throw MailgunError.encodingProblem
