@@ -2,23 +2,27 @@ import Foundation
 import NIO
 import AsyncHTTPClient
 import MultipartKit
+import Logging
 
 public struct LiveMailgunClient: MailgunClient {
     public let eventLoop: EventLoop
     public let config: Mailgun.Configuration
     public let httpClient: HTTPClient
     public let domain: Mailgun.Domain
+    public let logger: Logger
     
     /// Initialize with default domain
     public init(
         config: Mailgun.Configuration,
         eventLoop: EventLoop,
-        httpClient: HTTPClient
+        httpClient: HTTPClient,
+        logger: Logger
     ) {
         self.config = config
         self.eventLoop = eventLoop
         self.httpClient = httpClient
         self.domain = config.defaultDomain
+        self.logger = logger
     }
     
     /// Initialize with custom domain
@@ -26,11 +30,13 @@ public struct LiveMailgunClient: MailgunClient {
         config: Mailgun.Configuration,
         eventLoop: EventLoop,
         httpClient: HTTPClient,
+        logger: Logger,
         domain: Mailgun.Domain
     ) {
         self.config = config
         self.eventLoop = eventLoop
         self.httpClient = httpClient
+        self.logger = logger
         self.domain = domain
     }
     
@@ -88,7 +94,7 @@ public struct LiveMailgunClient: MailgunClient {
     }
     
     public func delegating(to eventLoop: EventLoop) -> LiveMailgunClient {
-        LiveMailgunClient(config: self.config, eventLoop: eventLoop, httpClient: self.httpClient, domain: self.domain)
+        LiveMailgunClient(config: self.config, eventLoop: eventLoop, httpClient: self.httpClient, logger: self.logger, domain: self.domain)
     }
     
     /// Base API URL based on the current region
