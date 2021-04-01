@@ -6,7 +6,7 @@ extension Array where Element == Mailgun.FullEmail {
             guard let name = entry.name else {
                 return entry.email
             }
-            return #""\#(name) <\#(entry.email)>""#
+            return "\(name) <\(entry.email)>"
         }
     }
 }
