@@ -21,7 +21,9 @@ let package = Package(
         .target(
             name: "MailgunKit",
             dependencies: [
-                .product(name: "NIO", package: "swift-nio"),
+                .product(name: "NIOCore", package: "swift-nio"),
+                .product(name: "NIOFoundationCompat", package: "swift-nio"),
+                .product(name: "NIOHTTP1", package: "swift-nio"),
                 .product(name: "MultipartKit", package: "multipart-kit"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
             ]

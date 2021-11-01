@@ -1,5 +1,6 @@
 import Foundation
-import NIO
+import NIOCore
+import NIOFoundationCompat
 import MultipartKit
 
 // https://github.com/vapor/vapor/blob/main/Sources/Vapor/Utilities/File.swift

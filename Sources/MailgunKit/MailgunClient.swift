@@ -1,4 +1,4 @@
-import NIO
+import NIOCore
 import AsyncHTTPClient
 
 public protocol MailgunClient {
