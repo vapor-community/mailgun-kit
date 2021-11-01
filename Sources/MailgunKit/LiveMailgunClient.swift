@@ -1,5 +1,6 @@
 import Foundation
 import NIO
+import NIOFoundationCompat
 import AsyncHTTPClient
 import MultipartKit
 import Logging
@@ -73,8 +74,9 @@ public struct LiveMailgunClient: MailgunClient {
                             throw MailgunError.authenticationFailed
                         }
                         
-                        guard let body = response.body,
-                              let errorResponse = try? JSONDecoder().decode(Mailgun.ErrorResponse.self, from: body)
+                        guard
+                            let responseBody = response.body,
+                            let errorResponse = try? JSONDecoder().decode(Mailgun.ErrorResponse.self, from: responseBody)
                         else {
                             throw MailgunError.unknownError(response)
                         }

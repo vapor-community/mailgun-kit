@@ -12,8 +12,8 @@ extension Mailgun {
         public let subject: String
         public let text: String
         public let html: String?
-        public let attachment: File?
-        public let inline: File?
+        public let attachment: [File]?
+        public let inline: [File]?
         
         private enum CodingKeys: String, CodingKey {
             case from
@@ -37,8 +37,8 @@ extension Mailgun {
             subject: String,
             text: String,
             html: String? = nil,
-            attachments: File? = nil,
-            inline: File? = nil
+            attachments: [File]? = nil,
+            inline: [File]? = nil
         ) {
             self.from = from
             self.to = to
@@ -61,8 +61,8 @@ extension Mailgun {
             subject: String,
             text: String,
             html: String? = nil,
-            attachments: File? = nil,
-            inline: File? = nil
+            attachments: [File]? = nil,
+            inline: [File]? = nil
         ) {
             self.from = from
             self.to = to.joined(separator: ",")
@@ -85,8 +85,8 @@ extension Mailgun {
             subject: String,
             text: String,
             html: String? = nil,
-            attachments: File? = nil,
-            inline: File? = nil
+            attachments: [File]? = nil,
+            inline: [File]? = nil
         ) {
             self.from = from
             self.to = to.formatted.joined(separator: ",")
